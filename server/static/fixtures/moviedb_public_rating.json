@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "web_site": "kinovasek.net",
+    "value": 6.34
+  },
+  {
+    "id": 2,
+    "web_site": "kinovasek.net",
+    "value": 6.26
+  },
+  {
+    "id": 3,
+    "web_site": "kinovasek.net",
+    "value": 7.37
+  },
+  {
+    "id": 4,
+    "web_site": "kinovasek.net",
+    "value": 7.82
+  },
+  {
+    "id": 5,
+    "web_site": "http://pickfilm.ru",
+    "value": 3.19
+  },
+  {
+    "id": 6,
+    "web_site": "http://pickfilm.ru",
+    "value": 0
+  },
+  {
+    "id": 7,
+    "web_site": "http://pickfilm.ru",
+    "value": 5.96
+  },
+  {
+    "id": 8,
+    "web_site": "kinovasek.net",
+    "value": 5.63
+  }
+]
