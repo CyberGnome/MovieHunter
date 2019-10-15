@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 import enum
+import uuid
 from datetime import datetime
 from passlib.apps import custom_app_context as pwd_context
-from app import db
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from itsdangerous import BadSignature, SignatureExpired
+from sqlalchemy.dialects.postgresql import UUID
+
+from app import db, app
 
 
 MovieGenre = db.Table(
@@ -108,6 +113,7 @@ class User(db.Model):
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
+    public_id = db.Column(UUID(as_uuid=True), unique=True, nullable=False, default=uuid.uuid4)
     username = db.Column(db.String(32), index=True)
     password = db.Column(db.String(128), nullable=False)
     created = db.Column(db.DateTime, default=datetime.utcnow)
