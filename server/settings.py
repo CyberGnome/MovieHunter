@@ -19,4 +19,5 @@ class Config(object):
                                                                DATABASE.get('host'),
                                                                DATABASE.get('port'),
                                                                DATABASE.get('database'))
+    SECRET_KEY = 'TEST-SECRET-KEY'  # Only for debug!
     SQLALCHEMY_TRACK_MODIFICATIONS = False
