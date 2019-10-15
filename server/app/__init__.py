@@ -12,4 +12,5 @@ migrate = Migrate(app, db)
 
 from app.api.users.users import *
 from app.api.movies.movies import *
+from app.api.genre.genre import *
 from app import models
