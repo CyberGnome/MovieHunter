@@ -3,10 +3,10 @@ import datetime
 from functools import wraps
 
 import jwt
-from flask import jsonify, request, abort, g, make_response
-from werkzeug.security import check_password_hash
+from flask import jsonify, request, make_response
 
 from app import app, db
+from app.api.users.permissions.role_permissions import roles_required
 from app.models import User, Role
 
 
@@ -97,6 +97,7 @@ def token_required(f):
 
 @app.route('/api/users/', methods=['GET'])
 @token_required
+@roles_required(Role.RoleNames.ADMIN)
 def get_all_users(current_user):
     users_list = [{'id': x.public_id, 'username': x.username} for x in User.query.all()]
     return jsonify({'users-list': users_list})
