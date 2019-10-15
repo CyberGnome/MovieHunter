@@ -11,4 +11,5 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 from app.api.users.users import *
+from app.api.movies.movies import *
 from app import models

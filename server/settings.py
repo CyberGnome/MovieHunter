@@ -4,7 +4,8 @@ import os
 APP_CONFIG = {
     'secret_key': os.getenv('SECRET_KEY', 'TEST-SECRET-KEY'),
     'debug': True,
-    'testing': True
+    'testing': True,
+    'movie_pagination': 5
 }
 
 DATABASE = {
