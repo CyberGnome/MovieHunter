@@ -1,6 +1,12 @@
 import os
 
 
+APP_CONFIG = {
+    'secret_key': os.getenv('SECRET_KEY', 'TEST-SECRET-KEY'),
+    'debug': True,
+    'testing': True
+}
+
 DATABASE = {
     'drivername': 'postgres',
     'host': os.getenv('DATABASE_HOSTNAME', 'localhost'),
@@ -12,12 +18,13 @@ DATABASE = {
 
 
 class Config(object):
-    DEBUG = True
-    TESTING = True
+    DEBUG = APP_CONFIG.get('debug')
+    TESTING = APP_CONFIG.get('testing')
+    SECRET_KEY = APP_CONFIG.get('secret_key')
+
     SQLALCHEMY_DATABASE_URI = 'postgresql://%s:%s@%s:%s/%s' % (DATABASE.get('username'),
                                                                DATABASE.get('password'),
                                                                DATABASE.get('host'),
                                                                DATABASE.get('port'),
                                                                DATABASE.get('database'))
-    SECRET_KEY = 'TEST-SECRET-KEY'  # Only for debug!
     SQLALCHEMY_TRACK_MODIFICATIONS = False
