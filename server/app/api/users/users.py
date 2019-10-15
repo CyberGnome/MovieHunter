@@ -43,17 +43,21 @@ def registration_new_user():
          'message': "New user created"}), 201
 
 
-@app.route('/api/users/login/')
+@app.route('/api/users/login/', methods=['POST'])
 def login_user():
-    auth = request.authorization
-    if not auth or not auth.username or not auth.password:
+    if not request.json:
         return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
 
-    user = User.query.filter_by(username=auth.username).first()
+    username = request.json.get('username')
+    password = request.json.get('password')
+    if username is None or password is None:
+        return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
+
+    user = User.query.filter_by(username=username).first()
     if not user:
         return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
 
-    if not user.verify_password(auth.password):
+    if not user.verify_password(password):
         return make_response('Could not verify', 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
     token = jwt.encode({'public_id': str(user.public_id),
                         'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)},
