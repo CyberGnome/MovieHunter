@@ -9,6 +9,14 @@ from app.api.users.permissions.user_permissions import roles_required, login_req
 from app.models import User, Role
 
 
+def check_password(password, confirm_password):
+    if password != confirm_password:
+        return False, "Passwords do not match!"
+    if len(password) < 8:
+        return False, "Password must be longer than 8 characters"
+    return True, None
+
+
 @app.route('/api/users/new/', methods=['POST'])
 def registration_new_user():
     if not request.json:
@@ -17,6 +25,13 @@ def registration_new_user():
 
     username = request.json.get('username')
     password = request.json.get('password')
+    confirm_password = request.json.get('confirm_password')
+
+    res, msg = check_password(password, confirm_password)
+    if not res:
+        return jsonify(
+            {'message': msg}), 400
+
     if username is None or password is None:
         return jsonify(
             {'message': "Bad Request"}), 400
