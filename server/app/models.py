@@ -122,7 +122,7 @@ class User(db.Model):
     public_id = db.Column(UUID(as_uuid=True), unique=True, nullable=False, default=uuid.uuid4)
     username = db.Column(db.String(32), index=True)
     password = db.Column(db.String(128), nullable=False)
-    password_salt = db.Column(db.String(128), default=uuid.uuid5)
+    password_salt = db.Column(db.String(128), default=salt)
     created = db.Column(db.DateTime, default=datetime.utcnow)
 
     role = db.relationship('Role', secondary=UserRole, lazy='subquery',
