@@ -1,7 +1,7 @@
 #include <QApplication>
 
 #include "moviehunter.h"
-#include "../auth/login.h"
+#include "../auth/login/login.h"
 
 
 int main(int argc, char *argv[])
@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     mhW.show();
 
     LoginWindow lW(&mhW);
+    lW.setWindowFlags(Qt::Window | Qt::WindowCloseButtonHint);
     lW.show();
 
     return app.exec();
