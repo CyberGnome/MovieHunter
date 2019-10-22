@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import enum
 import string
+import random
 import uuid
 from datetime import datetime
-from random import random
 
 from passlib.apps import custom_app_context as pwd_context
 from sqlalchemy.dialects.postgresql import UUID
@@ -11,7 +11,8 @@ from sqlalchemy.dialects.postgresql import UUID
 from app import db, app
 
 
-def salt(length=128):
+def salt():
+    length = 128
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for i in range(length))
 
